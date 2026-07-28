@@ -24,6 +24,15 @@
   html,body{margin:0;height:100%;background:var(--ink);color:var(--text);
     font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
   #app{display:flex;height:100%}
+  .qa{border-bottom:1px solid var(--rule);padding-bottom:20px;margin-bottom:22px}
+  .qa h2{font-size:16px;font-weight:600;letter-spacing:-.02em;margin:0 0 20px;color:var(--lime)}
+  .qa .q{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--text);
+    margin:0 0 4px;text-transform:none}
+  .qa .a{font-size:12.5px;line-height:1.55;color:var(--dim);font-weight:300;margin:0 0 5px}
+  .qa .src{font-size:10px;line-height:1.4;font-weight:400;margin:0 0 16px;word-break:break-all}
+  .qa .src a{color:#7f8894;text-decoration:none}
+  .qa .src a:hover{color:var(--lime);text-decoration:underline}
+  .qa .item:last-child .a{margin-bottom:5px}
   #panel{width:352px;flex:0 0 352px;background:var(--panel);
     border-right:1px solid var(--rule);overflow-y:auto;padding:26px 24px 60px}
   #map{flex:1;background:#0d0f12;position:relative}
@@ -199,6 +208,46 @@
 <body>
 <div id="app">
   <div id="panel">
+    <div class="qa">
+      <h2>Where a second home fits &mdash; Newton, MA</h2>
+
+      <div class="item">
+        <p class="q">What are the datasets used?</p>
+        <p class="a">All public: MassGIS Level&nbsp;3 assessor parcels; City of Newton GIS &mdash; building footprints, zoning, streets, easements, historic districts, floodplain, wetlands, spot elevations, town boundary.</p>
+        <p class="src"><a href="https://www.mass.gov/info-details/massgis-data-property-tax-parcels" target="_blank" rel="noopener">mass.gov/info-details/massgis-data-property-tax-parcels</a> &middot; <a href="https://github.com/NewtonMAGIS/GISData" target="_blank" rel="noopener">github.com/NewtonMAGIS/GISData</a></p>
+      </div>
+
+      <div class="item">
+        <p class="q">Why Newton, MA?</p>
+        <p class="a">Newton adopted an ADU ordinance on April&nbsp;22, 2025 that goes beyond state law &mdash; detached ADUs up to 1,000&nbsp;sq&nbsp;ft by right, 1,500 by special permit, no additional parking &mdash; plus it publishes unusually complete open GIS.</p>
+        <p class="src"><a href="https://www.figcitynews.com/2025/04/city-council-revises-rules-for-accessory-dwelling-units/" target="_blank" rel="noopener">figcitynews.com/2025/04/city-council-revises-rules-for-accessory-dwelling-units</a></p>
+      </div>
+
+      <div class="item">
+        <p class="q">What is this map?</p>
+        <p class="a">It measures the back yard of every Newton home and shows where a detached ADU physically fits &mdash; after subtracting the house, setbacks, front yard, and easements &mdash; then filters by owner, terrain, and lot.</p>
+        <p class="src">Computed from the datasets above.</p>
+      </div>
+
+      <div class="item">
+        <p class="q">Why is this map?</p>
+        <p class="a">Since 2014, Newton has permitted an average of 10 ADUs per year, and just 0.6% of single- and two-family homes have one &mdash; the right exists citywide but almost no one acts on it. This makes it concrete per parcel.</p>
+        <p class="src"><a href="https://bcheights.com/218544/metro/newtons-zoning-and-planning-committee-holds-public-hearing-on-proposed-amendments-to-accessory-dwelling-unit-ordinance/" target="_blank" rel="noopener">bcheights.com &mdash; ZAP public hearing on ADU amendments</a></p>
+      </div>
+
+      <div class="item">
+        <p class="q">Who cares?</p>
+        <p class="a">Homeowners weighing a rental or in-law unit; small builders sourcing prospects; the city and advocates estimating capacity. Councilors framed the ordinance as helping families, people with disabilities, and older adults stay in their homes.</p>
+        <p class="src"><a href="https://www.newtonbeacon.org/city-council-passes-adu-ordinance/" target="_blank" rel="noopener">newtonbeacon.org/city-council-passes-adu-ordinance</a></p>
+      </div>
+
+      <div class="item">
+        <p class="q">Why does it matter?</p>
+        <p class="a">From 2025 to 2035, Massachusetts needs at least 222,000 more homes to achieve housing abundance. ADUs add homes with minimal disruption; the binding constraint is knowing where they fit. This map answers that.</p>
+        <p class="src"><a href="https://www.mass.gov/info-details/a-home-for-everyone-progress-toward-222000" target="_blank" rel="noopener">mass.gov/info-details/a-home-for-everyone-progress-toward-222000</a></p>
+      </div>
+    </div>
+
     <div class="eyebrow">Newton &middot; Massachusetts</div>
     <h1>Where a second home fits</h1>
     <div class="lede">Since April 2025, Newton has allowed a detached accessory dwelling unit (ADU) by right &mdash; up to 1,000&nbsp;square feet, or 1,200 if you live on the lot or already have a garage. No special permit. No extra parking. The city has 121 of them. This map measures the back yard of every house in Newton and shows where one more would fit.</div>
