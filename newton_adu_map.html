@@ -986,6 +986,8 @@ fetch('newton_adu.geojson').then(r=>r.json()).then(d=>{
   document.querySelector('.lede').innerHTML=
     '<b style="color:#f07a5e">newton_adu.geojson isn\'t loading.</b> Keep it beside this file and serve the folder over http &mdash; <code>python3 -m http.server</code> &mdash; then open localhost:8000 rather than double-clicking the HTML.';
 });
+  const _pnl=document.getElementById('panel');
+  if(_pnl) _pnl.scrollTop=0;
 </script>
 </body>
 </html>
