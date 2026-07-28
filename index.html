@@ -194,6 +194,21 @@
   .leaflet-control-attribution{background:rgba(20,23,28,.86)!important;
     color:#5f666f!important;font-size:10px!important}
   .leaflet-control-attribution a{color:#7f868f!important}
+
+  #infobtn { display:flex; justify-content:center; align-items:center; position:absolute; bottom:20px; left:20px; z-index:4000; width:30px; height:30px; border-radius:50%; background:var(--raise); color:var(--text); border:1px solid var(--rule); cursor:pointer; font-family:'Space Grotesk',sans-serif; font-style:italic; font-size:16px; font-weight:600; box-shadow:0 4px 12px rgba(0,0,0,.5); padding-bottom: 2px; }
+  #infobtn:hover { border-color:var(--lime); color:var(--lime); }
+  #infomodal { display:none; position:absolute; inset:0; background:rgba(13,15,18,0.85); z-index:3000; justify-content:center; align-items:center; backdrop-filter:blur(4px); font-family:'Space Grotesk',sans-serif; }
+  #infomodal.show { display:flex; }
+  #infobox { background:var(--panel); border:1px solid var(--rule); padding:28px 24px; border-radius:8px; width:450px; max-height:85%; overflow-y:auto; position:relative; box-shadow:0 12px 40px rgba(0,0,0,.8); text-align:left; }
+  #infoclose { position:absolute; top:12px; right:16px; background:none; border:none; color:var(--dim); font-size:26px; cursor:pointer; line-height:1; }
+  #infoclose:hover { color:var(--text); }
+  .qa h2{font-size:18px;font-weight:600;letter-spacing:-.02em;margin:0 0 20px;color:var(--text)}
+  .qa .q{font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--lime);margin:0 0 4px;text-transform:none}
+  .qa .a{font-size:13px;line-height:1.55;color:var(--dim);font-weight:300;margin:0 0 5px}
+  .qa .src{font-size:11px;line-height:1.4;font-weight:400;margin:0 0 16px;word-break:break-all}
+  .qa .src a{color:#7f8894;text-decoration:none;border-bottom:1px solid #4a515a}
+  .qa .src a:hover{color:var(--lime);border-color:var(--lime)}
+  .qa .item:last-child .src{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -294,6 +309,46 @@
 
   <div id="map">
     <svg id="connector" width="100%" height="100%"></svg>
+    
+    <button id="infobtn">i</button>
+    <div id="infomodal">
+      <div id="infobox">
+        <button id="infoclose">&times;</button>
+        <div class="qa">
+          <h2>About this map // dexdogs.earth</h2>
+          <div class="item">
+            <p class="q">What are the datasets used?</p>
+            <p class="a">All public: MassGIS Level 3 assessor parcels; City of Newton GIS &mdash; building footprints, zoning, streets, easements, historic districts, floodplain, wetlands, spot elevations, town boundary.</p>
+            <p class="src">Sources: <a href="https://www.mass.gov/info-details/massgis-data-property-tax-parcels" target="_blank" rel="noopener">MassGIS</a> &middot; <a href="https://github.com/NewtonMAGIS/GISData" target="_blank" rel="noopener">Newton GIS</a></p>
+          </div>
+          <div class="item">
+            <p class="q">Why Newton MA?</p>
+            <p class="a">Newton adopted an ADU ordinance on April 22, 2025 that goes beyond state law &mdash; detached ADUs up to 1,000 sq ft by right, 1,500 by special permit, no additional parking &mdash; plus it publishes unusually complete open GIS.</p>
+            <p class="src">Sources: <a href="https://www.figcitynews.com/2025/04/city-council-revises-rules-for-accessory-dwelling-units/" target="_blank" rel="noopener">Fig City News</a> &middot; <a href="https://github.com/NewtonMAGIS/GISData" target="_blank" rel="noopener">Newton GIS</a></p>
+          </div>
+          <div class="item">
+            <p class="q">What is this map?</p>
+            <p class="a">It measures the back yard of every Newton home and shows where a detached ADU physically fits &mdash; after subtracting the house, setbacks, front yard, and easements &mdash; then filters by owner, terrain, and lot.</p>
+            <p class="src">Source: Map methodology (built from datasets above)</p>
+          </div>
+          <div class="item">
+            <p class="q">Why is this map?</p>
+            <p class="a">Since 2014, Newton has permitted an average of 10 ADUs per year, and just 0.6% of single- and two-family homes have one &mdash; the right exists citywide but almost no one acts on it. This makes it concrete per parcel.</p>
+            <p class="src">Source: <a href="https://bcheights.com/218544/metro/newtons-zoning-and-planning-committee-holds-public-hearing-on-proposed-amendments-to-accessory-dwelling-unit-ordinance/" target="_blank" rel="noopener">The Heights</a></p>
+          </div>
+          <div class="item">
+            <p class="q">Who cares?</p>
+            <p class="a">Homeowners weighing a rental or in-law unit; small builders sourcing prospects; the city and advocates estimating capacity. Councilors framed the ordinance as helping ADUs support families, people with disabilities, and older adults staying in their homes.</p>
+            <p class="src">Source: <a href="https://www.newtonbeacon.org/city-council-passes-adu-ordinance/" target="_blank" rel="noopener">Newton Beacon</a></p>
+          </div>
+          <div class="item">
+            <p class="q">Why does it matter?</p>
+            <p class="a">From 2025 to 2035, Massachusetts needs at least 222,000 more homes to achieve housing abundance. ADUs add homes with minimal disruption; the binding constraint is knowing where they fit. This map answers that.</p>
+            <p class="src">Source: <a href="https://www.mass.gov/info-details/a-home-for-everyone-progress-toward-222000" target="_blank" rel="noopener">Mass.gov</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="hovertip"></div>
     <div id="lotcard"><div id="lotdrag"></div><button id="lotclose">&times;</button><div id="lotbody"></div></div>
     <div id="scope">
@@ -937,6 +992,10 @@ fetch('newton_adu.geojson').then(r=>r.json()).then(d=>{
   document.querySelector('.lede').innerHTML=
     '<b style="color:#f07a5e">newton_adu.geojson isn\'t loading.</b> Keep it beside this file and serve the folder over http &mdash; <code>python3 -m http.server</code> &mdash; then open localhost:8000 rather than double-clicking the HTML.';
 });
+</script>
+<script>
+document.getElementById('infobtn').onclick = () => document.getElementById('infomodal').classList.add('show');
+document.getElementById('infoclose').onclick = () => document.getElementById('infomodal').classList.remove('show');
 </script>
 </body>
 </html>
