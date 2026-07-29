@@ -268,7 +268,7 @@
     #infocard,#fbcard{width:auto;max-width:none;max-height:70dvh;padding:22px 20px}
     #infocard h2,#fbcard h2{font-size:19px;margin-bottom:16px}
     #infocard .q{font-size:13.5px}#infocard .a{font-size:13px}
-    #lotcard{width:min(300px,calc(100vw - 24px))!important;height:auto!important;max-height:64dvh}
+    #lotcard{width:min(230px,calc(100vw - 40px))!important;height:auto!important;max-height:52dvh}
     .resize-handle .rh{width:32px;height:32px;font-size:17px}
     .center-dot .cd{width:34px;height:34px}
     .leaflet-control-zoom{margin-bottom:140px!important;margin-right:10px!important}
@@ -717,6 +717,11 @@ function drawCircle(){
       document.body.classList.add('grabbing');
       ev.preventDefault(); ev.stopPropagation();
     });
+    el.addEventListener('touchstart',ev=>{
+      dragging=true; map.dragging.disable();
+      document.body.classList.add('grabbing');
+      ev.preventDefault(); ev.stopPropagation();
+    },{passive:false});
   }
 }
 
@@ -781,6 +786,17 @@ mapEl.addEventListener('mousemove',ev=>{
   if(rp>1) setRadius(px*(radiusMi/rp));
   ev.preventDefault();
 });
+mapEl.addEventListener('touchmove',ev=>{
+  if(!center||!scopeOn||!dragging) return;
+  const t=ev.touches[0]; if(!t) return;
+  const r=mapEl.getBoundingClientRect();
+  const px0=t.clientX-r.left, py0=t.clientY-r.top;
+  const c=map.latLngToContainerPoint(L.latLng(center[0],center[1]));
+  const px=Math.hypot(px0-c.x,py0-c.y);
+  const rp=ringPx();
+  if(rp>1) setRadius(px*(radiusMi/rp));
+  ev.preventDefault();
+},{passive:false});
 window.addEventListener('mouseup',()=>{
   if(dragging){
     dragging=false;
@@ -788,6 +804,13 @@ window.addEventListener('mouseup',()=>{
     document.body.classList.remove('grabbing');
     mapEl.style.cursor='';
     suppressClick=true;   // swallowed by the click handler's own reset below
+  }
+});
+window.addEventListener('touchend',()=>{
+  if(dragging){
+    dragging=false; map.dragging.enable();
+    document.body.classList.remove('grabbing');
+    mapEl.style.cursor=''; suppressClick=true;
   }
 });
 map.on('click',e=>{ if(!dragging&&scopeOn&&!suppressClick) moveTo(e.latlng); suppressClick=false; });
@@ -922,6 +945,25 @@ document.getElementById('lotclose').onclick=()=>{ card.classList.remove('show');
   window.addEventListener('mousemove',e=>{const r=map.getContainer().getBoundingClientRect();
     move(e.clientX-r.left,e.clientY-r.top);});
   window.addEventListener('mouseup',up);
+
+  const cardEl=document.getElementById('lotcard');
+  cardEl.addEventListener('touchstart',e=>{
+    if(e.target.closest('#lotclose,a,button,input,textarea,select')) return;
+    const t=e.touches[0]; if(!t) return;
+    if(L.DomEvent) L.DomEvent.stop(e);
+    const r=map.getContainer().getBoundingClientRect();
+    down(t.clientX-r.left,t.clientY-r.top);
+    e.preventDefault();
+  },{passive:false});
+  window.addEventListener('touchmove',e=>{
+    if(!dragCard) return;
+    const t=e.touches[0]; if(!t) return;
+    const r=map.getContainer().getBoundingClientRect();
+    move(t.clientX-r.left,t.clientY-r.top);
+    e.preventDefault();
+  },{passive:false});
+  window.addEventListener('touchend',up);
+  window.addEventListener('touchcancel',up);
 })();
 
 function openCard(html, ev){
