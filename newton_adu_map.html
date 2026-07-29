@@ -33,15 +33,30 @@
   .qa .src a{color:#7f8894;text-decoration:none}
   .qa .src a:hover{color:var(--lime);text-decoration:underline}
   .qa .item:last-child .a{margin-bottom:5px}
-  #infobtn{position:absolute;left:18px;bottom:18px;z-index:1250;width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:var(--raise);color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;font-style:italic;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;transition:background .14s,transform .14s}
+  #infobtn{position:absolute;left:18px;bottom:18px;z-index:1450;width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:var(--raise);color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;font-style:italic;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;transition:background .14s,transform .14s}
   #infobtn:hover{background:#20242c;transform:translateY(-1px)}
-  #infomodal{position:absolute;inset:0;z-index:1400;display:none;background:rgba(8,10,13,.55);backdrop-filter:blur(3px)}
-  #infomodal.show{display:flex;align-items:center;justify-content:center}
-  #infocard{position:relative;width:min(560px,90%);max-height:82%;overflow-y:auto;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:32px 34px;box-shadow:0 20px 60px rgba(0,0,0,.7);font-family:'Space Grotesk',sans-serif}
+  #fbbtn{position:absolute;left:66px;bottom:18px;z-index:1450;width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:var(--raise);color:var(--lime);font-size:16px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;transition:background .14s,transform .14s}
+  #fbbtn:hover{background:#20242c;transform:translateY(-1px)}
+  #infomodal{position:absolute;left:18px;bottom:66px;z-index:1400;display:none}
+  #infomodal.show{display:block}
+  #infocard{position:relative;width:min(440px,calc(100vw - 400px));max-height:calc(100vh - 100px);overflow-y:auto;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:28px 30px;box-shadow:0 20px 60px rgba(0,0,0,.7);font-family:'Space Grotesk',sans-serif}
   #infocard::-webkit-scrollbar{width:7px}
   #infocard::-webkit-scrollbar-thumb{background:#3a414c;border-radius:3px}
   #infoclose{position:absolute;top:14px;right:16px;background:transparent;border:none;color:var(--dim);font-size:24px;line-height:1;cursor:pointer;padding:2px 7px;border-radius:5px}
   #infoclose:hover{color:var(--text);background:rgba(255,255,255,.06)}
+  #fbmodal{position:absolute;left:18px;bottom:66px;z-index:1400;display:none}
+  #fbmodal.show{display:block}
+  #fbcard{position:relative;width:min(400px,calc(100vw - 400px));max-height:calc(100vh - 100px);overflow-y:auto;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:28px 30px;box-shadow:0 20px 60px rgba(0,0,0,.7);font-family:'Space Grotesk',sans-serif}
+  #fbclose{position:absolute;top:14px;right:16px;background:transparent;border:none;color:var(--dim);font-size:24px;line-height:1;cursor:pointer;padding:2px 7px;border-radius:5px}
+  #fbclose:hover{color:var(--text);background:rgba(255,255,255,.06)}
+  #fbcard h2{font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:700;letter-spacing:-.03em;margin:0 0 8px;color:var(--text)}
+  #fbcard h2 span{color:var(--lime);font-weight:500}
+  .fblede{font-size:13px;line-height:1.55;color:var(--dim);font-weight:300;margin:0 0 18px}
+  .fblab{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:500;margin:0 0 6px}
+  .fbinput{width:100%;padding:9px 11px;font-size:13px;font-family:'Space Grotesk',sans-serif;font-weight:300;border:1px solid var(--rule);border-radius:5px;background:var(--raise);color:var(--text);margin:0 0 15px;resize:vertical}
+  .fbinput:focus{outline:1px solid var(--lime);outline-offset:1px}
+  .fbsend{width:100%;padding:11px;background:var(--lime);color:var(--ink);border:none;border-radius:5px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;transition:background .14s}
+  .fbsend:hover{background:#d9ff85}
   #infocard h2{font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:700;letter-spacing:-.03em;margin:0 0 26px;color:var(--text)}
   #infocard h2 span{color:var(--lime);font-weight:500}
   #infocard .qsec{margin-bottom:20px;padding-bottom:19px;border-bottom:1px solid var(--rule)}
@@ -125,6 +140,8 @@
   .tog.on span{transform:translateX(13px);background:var(--ink)}
   #scope.off .huge,#scope.off .unit,#scope.off .srow,#scope.off .rad{opacity:.3}
   .grabbing,.grabbing *{cursor:ew-resize!important}
+  #lotcard:active{cursor:grabbing}
+  #lotcard a,#lotcard button,#lotcard input,#lotcard textarea{cursor:pointer}
   /* crosshair over the whole map when the circle is active; beats Leaflet's
      .leaflet-grab / .leaflet-interactive default cursors */
   .leaflet-container.dropmode,
@@ -161,7 +178,7 @@
   #connector{position:absolute;inset:0;z-index:1150;pointer-events:none;display:none}
   #connector.show{display:block}
   #connector line{stroke:#ffffff;stroke-width:1.5;opacity:.7;stroke-dasharray:4,4}
-  #lotcard{position:absolute;z-index:1200;display:none;cursor:default;
+  #lotcard{position:absolute;z-index:1200;display:none;cursor:grab;
     width:min(300px, calc(100% - 24px));
     max-height:calc(100% - 24px);
     background:var(--raise);color:var(--text);border:1px solid var(--rule);
@@ -175,7 +192,7 @@
   #lotclose{cursor:pointer}
   #lotbody::-webkit-scrollbar{width:6px}
   #lotbody::-webkit-scrollbar-thumb{background:#3a414c;border-radius:3px}
-  #lotdrag{position:absolute;top:0;left:0;right:0;height:34px;cursor:grab;z-index:1}
+  #lotdrag{position:absolute;top:0;left:0;right:0;height:34px;cursor:grab;z-index:1;display:none}
   #lotdrag:active{cursor:grabbing}
   #lotclose{position:absolute;top:7px;right:9px;z-index:3;
     background:transparent;border:none;color:var(--dim);font-size:19px;
@@ -341,6 +358,16 @@
       <div class="qsec"><p class="q">Why does it matter?</p>
         <p class="a">From 2025 to 2035, Massachusetts needs at least 222,000 more homes to achieve housing abundance. ADUs add homes with minimal disruption; the binding constraint is knowing where they fit. This map answers that.</p>
         <p class="s"><a href="https://www.mass.gov/info-details/a-home-for-everyone-progress-toward-222000" target="_blank" rel="noopener">Mass.gov &mdash; A Home for Everyone</a></p></div>
+    </div></div>
+    <button id="fbbtn" title="Send feedback">&#9993;</button>
+    <div id="fbmodal"><div id="fbcard"><button id="fbclose">&times;</button>
+      <h2>Feedback <span>// dexdogs</span></h2>
+      <p class="fblede">Spotted something off, or have an idea? Send it straight to us.</p>
+      <label class="fblab">Your email (optional)</label>
+      <input id="fbemail" class="fbinput" type="email" placeholder="you@example.com">
+      <label class="fblab">Message</label>
+      <textarea id="fbmsg" class="fbinput" rows="5" placeholder="What's on your mind?"></textarea>
+      <button id="fbsend" class="fbsend">Send feedback</button>
     </div></div>
     <div id="lotcard"><div id="lotdrag"></div><button id="lotclose">&times;</button><div id="lotbody"></div></div>
     <div id="scope">
@@ -816,6 +843,7 @@ document.getElementById('lotclose').onclick=()=>{ card.classList.remove('show');
 // drag the card around the map
 (function(){
   const strip=document.getElementById('lotdrag');
+  const dragEl=document.getElementById('lotcard');
   let dragCard=false,ox=0,oy=0;
   function down(cx,cy){
     dragCard=true;
@@ -847,7 +875,8 @@ document.getElementById('lotclose').onclick=()=>{ card.classList.remove('show');
       setTimeout(()=>{ suppressClick=false; }, 250);
     }
   }
-  strip.addEventListener('mousedown',e=>{
+  dragEl.addEventListener('mousedown',e=>{
+    if(e.target.closest('#lotclose,a,button,input,textarea,select')) return;
     e.stopPropagation();
     if(L.DomEvent) L.DomEvent.stop(e);
     const r=map.getContainer().getBoundingClientRect();
@@ -986,7 +1015,29 @@ fetch('newton_adu.geojson').then(r=>r.json()).then(d=>{
 });
   const _pnl=document.getElementById('panel');
   if(_pnl) _pnl.scrollTop=0;
-  (function(){var b=document.getElementById('infobtn'),m=document.getElementById('infomodal'),c=document.getElementById('infoclose');if(b&&m){b.addEventListener('click',function(){m.classList.add('show')});c.addEventListener('click',function(){m.classList.remove('show')});m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('show')});document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.remove('show')})}})();
+  (function(){
+    const D=L.DomEvent;
+    ['scope','infomodal','fbmodal','infobtn','fbbtn','lotcard'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el&&D&&D.disableClickPropagation){D.disableClickPropagation(el);}
+      if(el&&D&&D.disableScrollPropagation){D.disableScrollPropagation(el);}
+    });
+    const iB=document.getElementById('infobtn'),iM=document.getElementById('infomodal'),iC=document.getElementById('infoclose'),
+          fB=document.getElementById('fbbtn'),fM=document.getElementById('fbmodal'),fC=document.getElementById('fbclose');
+    function closeAll(){if(iM)iM.classList.remove('show');if(fM)fM.classList.remove('show');}
+    if(iB&&iM){iB.addEventListener('click',e=>{e.stopPropagation();const o=iM.classList.contains('show');closeAll();if(!o)iM.classList.add('show');});iC.addEventListener('click',()=>iM.classList.remove('show'));}
+    if(fB&&fM){fB.addEventListener('click',e=>{e.stopPropagation();const o=fM.classList.contains('show');closeAll();if(!o)fM.classList.add('show');});fC.addEventListener('click',()=>fM.classList.remove('show'));}
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();});
+    const send=document.getElementById('fbsend');
+    if(send){send.addEventListener('click',()=>{
+      const email=(document.getElementById('fbemail').value||'').trim();
+      const msg=(document.getElementById('fbmsg').value||'').trim();
+      if(!msg){document.getElementById('fbmsg').focus();return;}
+      const s=encodeURIComponent('Homecoming map feedback');
+      const b=encodeURIComponent(msg+(email?'\n\nFrom: '+email:''));
+      window.location.href='mailto:ankur@dexdogs.earth?subject='+s+'&body='+b;
+    });}
+  })();
 </script>
 </body>
 </html>
