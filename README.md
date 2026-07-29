@@ -1,6 +1,6 @@
-# Where a second home fits — Newton, MA
+# Homecoming // dexdogs
 
-An interactive map that measures the back yard of every home in Newton, Massachusetts and shows where a detached accessory dwelling unit (ADU) could physically fit.
+An interactive map that measures the back yard of every home in the selected city and shows where a detached accessory dwelling unit (ADU) could physically fit. Selected city: Newton, MA.
 
 ## What are the datasets used?
 

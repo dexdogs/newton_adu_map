@@ -76,7 +76,7 @@
 
   .eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;
     color:var(--lime);margin-bottom:10px;font-weight:500}
-  h1{font-size:28px;line-height:1.08;font-weight:600;margin:0 0 12px;letter-spacing:-.03em}
+  h1{font-size:20px;line-height:1.08;font-weight:500;margin:0 0 12px;letter-spacing:-.03em}
   .lede{font-size:13px;line-height:1.6;color:var(--dim);margin-bottom:22px;font-weight:300}
 
   .tally{display:flex;gap:8px;margin-bottom:22px}
@@ -244,7 +244,12 @@
 <div id="app">
   <div id="panel">
 
+    <h1 style="font-family: 'Space Grotesk', sans-serif; text-transform: margin-top: 0;">Homecoming // dexdogs</h1>
 
+    <h3 style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; margin-top: 0; color: #555;">City: Newton, MA</h3>
+    
+    <hr style="border: 0; border-top: 1px solid #ccc; margin-bottom: 10px;">
+    
     <div class="tally">
       <div><div class="n" id="n1">&mdash;</div><div class="k">parcels</div></div>
       <div><div class="n" id="n2">&mdash;</div><div class="k">median sq ft</div></div>
@@ -324,14 +329,6 @@
       <input type="range" id="maxval" min="600000" max="5000000" step="50000" value="5000000">
       <div class="meta">up to $<span id="maxvalv">5.0M</span></div>
     </fieldset>
-
-    <div class="colophon">
-      <b>How this was made.</b> Parcel boundaries and assessments from the Massachusetts Bureau of Geographic Information (MassGIS) Level&nbsp;3 standard, calendar year 2025 / fiscal year 2026; building footprints, zoning, streets, easements, historic districts and floodplain from the City of Newton's own Geographic Information System (GIS), fiscal year 2027. For each lot the house footprint and any easements are cut out of the parcel, the front-yard band is removed, the remainder is pulled in by the side setback, and the largest rectangle that survives is measured. Unit size is capped at half the existing home's living area.
-      <br><br>
-      Street centrelines establish which edge of each lot faces the road, so only genuine back-yard space is measured. Corner lots are given two front yards. Local Historic District (LHD) boundaries are treated as a hard stop; National Register listing, which does not restrict a private owner, is not. Ownership is described in categories only &mdash; no names. Family trusts count as resident owners, since 78% of trust-held homes here are owner-occupied against 11% of LLC-held ones.
-      <br><br>
-      The relief shading is a surface interpolated from those same elevation points on a 90&nbsp;metre grid and lit from the northwest, so ridges read pale and hollows dark. Terrain figures come from the city's 12,143 spot elevations, which average about 83&nbsp;metres apart &mdash; wider than a typical lot. Slope here describes the ground <i>around</i> a property, not within its back yard, and is for triage only.<br><br>Empty lots &mdash; state assessor land use code 1320, vacant residential land, with no building value &mdash; are drawn in violet. For these the question is different: not what fits behind a house, but whether a house fits at all. Solid violet means a buildable envelope survives the setbacks; hollow means it does not. Newton's boundary is the dashed line.<br><br><b>What it can't tell you.</b> Ledge, mature trees, crane access to the back yard, and where the sewer lateral runs are all invisible here. This narrows a search; it does not decide anything.
-    </div>
   </div>
 
   <div id="map">
